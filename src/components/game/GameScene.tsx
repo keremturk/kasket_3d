@@ -3,12 +3,13 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stats } from '@react-three/drei';
 import { useGameStore } from '../../store/gameStore';
 import { Table } from '../scene/Table';
-import { TileSystem } from '../scene/TileSystem';
 import { Lighting } from '../scene/Lighting';
 import { CameraController } from '../scene/CameraController';
+import { PlayerHand } from '../scene/PlayerHand';
+import { BoardMelds } from '../scene/BoardMelds';
 
 export const GameScene: React.FC = () => {
-  const { settings } = useGameStore();
+  const { settings, players } = useGameStore();
   
   return (
     <div className="w-full h-full">
@@ -29,7 +30,10 @@ export const GameScene: React.FC = () => {
         <Lighting />
         <CameraController />
         <Table />
-        <TileSystem />
+        <BoardMelds />
+
+        {/* Render a hand for the first player for now */}
+        {players.length > 0 && <PlayerHand playerId={players[0].id} />}
         
         {settings.graphicsQuality === 'ultra' && <Stats />}
         

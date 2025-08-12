@@ -82,6 +82,13 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
     setDraggingTile(null);
   };
 
+  const handleClick = () => {
+    // We only allow selecting tiles that are in a player's hand for now
+    if (tile.state === 'hand') {
+      useGameStore.getState().toggleTileSelection(tile.id);
+    }
+  }
+
   return (
     <group>
       {/* Main tile body */}
@@ -95,6 +102,7 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
         onPointerOut={handlePointerOut}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
+        onClick={handleClick}
       >
         <boxGeometry args={[1.5, 0.2, 2]} />
         <primitive object={tileMaterial} />
