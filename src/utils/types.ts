@@ -34,8 +34,11 @@ export interface GameState {
   gamePhase: GamePhase;
   gameMode: GameMode;
   currentPlayerId: string | null;
+  winnerId: string | null;
   players: Player[];
-  tiles: Tile[];
+  tiles: Tile[]; // Master list of all tiles
+  drawPile: string[]; // Tile IDs
+  melds: Meld[]; // Sets on the table
   selectedTiles: string[]; // tile IDs
   hoveredTileId: string | null;
   draggingTileId: string | null;
